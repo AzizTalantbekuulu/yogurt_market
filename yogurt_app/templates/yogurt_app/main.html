@@ -1,0 +1,74 @@
+{% extends 'yogurt_app/base.html' %}
+{% block title %}main{% endblock %}
+
+{% block check_user %}
+    {% if user.is_authenticated %}
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a href="{% url 'logout_user' %}" class="navbar-brand" role="button" aria-pressed="true">
+                    Log out
+                </a>
+            </li>
+        </ul>
+    {% else %}
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a href="{% url 'log_in' %}" class="navbar-brand" style="margin-right: 10px" role="button" aria-pressed="true">
+                    Log in
+                </a>
+            </li>
+        </ul>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+     <div class="album py-5 bg-secondary">
+        <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center text-light bg-secondary">
+            <h1 class="display-4 font-weight-normal">Recommended</h1>
+            <p class="lead font-weight-normal">Welcome to our yogurt market!</p>
+        </div>
+        <div class="container">
+            <div class="row">
+
+              {% for yogurt in yogurts %}
+
+                    <div class="col-md-4">
+                      <div class="card mb-4 box-shadow">
+                        <img class="card-img-top" src="{{ yogurt.image.url }}" alt="Card image cap">
+                        <div class="card-body">
+                          <h3 class="card-text"><a href="{% url 'yogurt_detail' yogurt.id %}" class="link-dark">{{ yogurt.name }}.</a></h3>
+                          <ul>
+                              <li><p class="card-text">Mass: {{ yogurt.mass }} g</p></li>
+                              <li><p class="card-text">Protein: {{ yogurt.protein }} g</p></li>
+                              <li><p class="card-text">Fats: {{ yogurt.fats }} g</p></li>
+                              <li><p class="card-text">Carbohydrates: {{ yogurt.carbohydrates }} g</p></li>
+                              <li><p class="card-text">Kcal: {{ yogurt.kcal }}</p></li>
+                          </ul>
+                          <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                              <a href="{% url 'order_create' yogurt.id %}" class="btn btn-success">Order</a>
+                            </div>
+                            <small class="text-muted" style="font-size: 110%">{{ yogurt.price }} USD</small>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+              {% endfor %}
+
+            </div>
+        </div>
+      </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="../../assets/js/vendor/popper.min.js"></script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <script src="../../assets/js/vendor/holder.min.js"></script>
+    <script>
+      Holder.addTheme('thumb', {
+        bg: '#55595c',
+        fg: '#eceeef',
+        text: 'Thumbnail'
+      });
+    </script>
+{% endblock %}

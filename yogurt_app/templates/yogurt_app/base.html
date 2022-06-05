@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width-device-width, initial-scale=1">
+    <title>{% block title %}{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <img class="mr-3" src="https://upload.wikimedia.org/wikipedia/en/0/07/Ala-Too_International_University_Seal.png" alt="" width="48" height="48">
+            <a href="http://alatoo.edu.kg/#gsc.tab=0" class="navbar-brand">ALA-TOO university</a>
+            <a href="{% url 'main' %}" class="navbar-brand">Main</a>
+        </div>
+
+        {% block check_user %}{% endblock %}
+
+    </div>
+</nav>
+{% block content %}{% endblock %}
+<div class="album py-5 bg-dark">
+    <footer class="my-5 pt-5 text-muted text-center text-small">
+    <p class="mb-1 text-light">© Yogurt market</p>
+</footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+</body>
+</html>

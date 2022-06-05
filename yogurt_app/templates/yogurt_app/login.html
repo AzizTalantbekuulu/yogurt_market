@@ -1,0 +1,41 @@
+{% extends 'yogurt_app/base.html' %}
+{% block content %}
+<div class="album py-5 bg-secondary">
+  <div class="container">
+    <br><br><br>
+      <div class="row">
+        <div class="col-md-8 order-md-1">
+        {% if error %}
+            <div class="alert alert-danger" role="alert">Wrong login or password. Please re-enter.</div>
+        {% endif %}
+          <h4 class="mb-3">Log in</h4>
+          <form action="{% url 'log_in' %}" class="needs-validation" novalidate method="POST">
+            {% csrf_token %}
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="login">Login</label>
+                <input type="text" class="form-control" id="login" name="login" placeholder="" required>
+                <div class="invalid-feedback">
+                  Valid username is required.
+                </div>
+              </div>
+              <br>
+              <div class="col-md-6 mb-3">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="" required>
+                <div class="invalid-feedback">
+                  Valid password is required.
+                </div>
+              </div>
+            </div>
+            <div class="text">
+              <p>Do not have an account? <a href="{% url 'registration' %}" class="link-light">Register</a></p>
+            </div>
+            <button class="btn btn-primary btn-lg btn-block" type="submit">sign in</button>
+          </form>
+          <br><br><br><br>
+        </div>
+      </div>
+    </div>
+</div>
+{% endblock %}
